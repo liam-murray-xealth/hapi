@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    url: 'jdbc:h2:file:./target/database/h2'
+    #url: jdbc:h2:mem:test_mem
+    username: sa
+    password: null
+    driverClassName: org.h2.Driver
+    max-active: 15
+  jpa:
+    properties:
+      hibernate.format_sql: false
+      hibernate.show_sql: false
+  batch:
+    job:
+      enabled: false
+  main:
+    # Needed to allow override of MdmRuleValidator in MdmConfig
+    allow-bean-definition-overriding: true
+
+hapi:
+  fhir:
+    fhir_version: R4
+    graphql_enabled: true
+    mdm_enabled: true
+    subscription:
+      resthook_enabled: true
+    narrative_enabled: true
+    partitioning:
+      allow_references_across_partitions: false
+      partitioning_include_in_search_hashes: false
+    cors:
+      allow_Credentials: true
+      allowed_origin:
+        - '*'
+    tester:
+      home:
+        name: Local Tester (default)
+        server_address: 'http://localhost:8080/fhir/default'
+        refuse_to_fetch_third_party_urls: false
+        fhir_version: R4
+      home2:
+        name: Local Tester (general hospital)
+        server_address: 'http://localhost:8080/fhir/general'
+        refuse_to_fetch_third_party_urls: false
+        #use_apache_address_strategy_https: true
+        fhir_version: R4
+      home3:
+        name: Local Tester (elsewhere)
+        server_address: 'http://localhost:8080/fhir/elsewhere'
+        refuse_to_fetch_third_party_urls: false
+        #use_apache_address_strategy_https: true
+        fhir_version: R4
+      global:
+        name: Global Tester
+        server_address: "http://hapi.fhir.org/baseR4"
+        refuse_to_fetch_third_party_urls: false
+        fhir_version: R4
