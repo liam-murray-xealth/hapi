@@ -7,7 +7,7 @@ BASE='http://localhost:8080/fhir/default'
 create_url="$BASE/"'$partition-management-create-partition'
 
 NAME=elsewhere
-DESCRIPTION c="St. Elsewhere Hospital"
+DESCRIPTION="St. Elsewhere Hospital"
 ID=124
 
 read -r -d '' BODY <<EOF
@@ -30,9 +30,15 @@ read -r -d '' BODY <<EOF
 }
 EOF
 
+echo "===> Sending"
+echo
 echo $BODY
+echo
+echo "<=== Response"
+echo
 
+# -d @partition.json \
 
-# curl -vX POST $create_url \
-#   -d @partition.json \
-#   --header "Content-Type: application/json"
+curl $create_url \
+  -d "$BODY" \
+  --header "Content-Type: application/json"
