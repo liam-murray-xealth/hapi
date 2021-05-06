@@ -34,7 +34,10 @@ def confirm_post(url, body):
   if click.confirm('\nContinue?', default=False):
     res = requests.post(url, json=body)
     print(res.status_code)
-    print(res.json())
+    try:
+      print(res.json())
+    except Exception:
+      pass
 
 def create_part(entry):
   (name, ident, description) = entry
